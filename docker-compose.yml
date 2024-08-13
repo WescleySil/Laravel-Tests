@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
     # image project
     app:
@@ -26,6 +24,12 @@ services:
             - ./docker/nginx/:/etc/nginx/conf.d/
         networks:
             - laravel
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+            start_period: 5s
 
     # db mysql
     db:
